@@ -1,26 +1,23 @@
 class Solution {
-
     public int missingNumber(int[] nums) {
-        sortNumbersInPlace(nums);  // Correct function call
+        int n = nums.length;
 
-        for (int i = 0; i < nums.length; i++) {
+        // Step 1: Place elements at their correct indices (Cycle Sort approach)
+        for (int i = 0; i < n; i++) {
+            while (nums[i] < n && nums[i] != i) {  // Sanity check and swapping logic
+                int d = nums[i]; // Correct index where `nums[i]` should be
+                swap(nums, i, d);
+            }
+        }
+
+        // Step 2: Find the missing number by checking deviants
+        for (int i = 0; i < n; i++) {
             if (nums[i] != i) {
-                return i;  // Return missing number
+                return i;  // The missing number
             }
         }
 
-        return nums.length;  // If all numbers are in place, return `n`
-    }
-
-    
-    public void sortNumbersInPlace(int[] nums) {  // Renamed for clarity
-        int arr_length = nums.length;
-
-        for (int i = 0; i < arr_length; i++) {
-            while (nums[i] < arr_length && nums[i] != i) {  // Added boundary check
-                swap(nums, i, nums[i]); // Use `nums[i]` instead of `d`
-            }
-        }
+        return n;  // If all numbers are in place, missing number is `n`
     }
 
     private void swap(int[] nums, int i, int j) {  // Swap function
@@ -28,6 +25,4 @@ class Solution {
         nums[i] = nums[j];
         nums[j] = temp;
     }
-
-    
 }
