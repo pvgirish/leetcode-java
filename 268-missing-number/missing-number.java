@@ -1,16 +1,33 @@
 class Solution {
+
     public int missingNumber(int[] nums) {
+        sortNumbersInPlace(nums);  // Correct function call
 
-        int array_sum = 0;
-        int range_sum = (nums.length * (nums.length+1))/2;
-        
-        int missing_number=0;
-
-        for ( int i = 0; i < nums.length; i++)
-        {
-            array_sum += nums[i];
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != i) {
+                return i;  // Return missing number
+            }
         }
-        
-        return missing_number = Math.abs(range_sum - array_sum);
+
+        return nums.length;  // If all numbers are in place, return `n`
     }
+
+    
+    public void sortNumbersInPlace(int[] nums) {  // Renamed for clarity
+        int arr_length = nums.length;
+
+        for (int i = 0; i < arr_length; i++) {
+            while (nums[i] < arr_length && nums[i] != i) {  // Added boundary check
+                swap(nums, i, nums[i]); // Use `nums[i]` instead of `d`
+            }
+        }
+    }
+
+    private void swap(int[] nums, int i, int j) {  // Swap function
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+
+    
 }
