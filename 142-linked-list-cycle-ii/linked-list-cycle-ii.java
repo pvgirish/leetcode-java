@@ -9,9 +9,9 @@ public class Solution {
         ListNode third = null; // Third pointer to help find the start of the cycle
 
         while (hare.next != null && hare.next.next != null) {
-            hare = hare.next.next; // Move hare two steps
             tortoise = tortoise.next; // Move tortoise one step
-
+            hare = hare.next.next; // Move hare two steps
+            
             if (hare == tortoise) { // Cycle detected
                 third = head;
                 while (third != tortoise) {
